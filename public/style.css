@@ -1,0 +1,279 @@
+/* ── 設計風格(參照 ToDo App 配色 + 字型) ────
+ * - 純米白底,無網格
+ * - 乾淨無襯線字(系統 Noto Sans TC / PingFang TC)
+ * - 大圓角(16-20px),無邊框
+ * - 柔陰影(box-shadow blur 12-24px,非偏移硬陰影)
+ * - 復古暖色:森林綠 / 珊瑚紅 / 芥末黃
+ * - 卡片內左上角小黑圓徽章 + 圖示
+ */
+
+* { box-sizing: border-box; }
+
+[hidden] { display: none !important; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #FAF7F2;
+  color: #1F2937;
+  font-family: -apple-system, BlinkMacSystemFont, "Inter", "PingFang TC",
+               "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.app {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 36px 22px 64px;
+}
+
+/* ── 標題區 ─────────────────────────────── */
+.app__header {
+  margin-bottom: 28px;
+}
+
+.app__title {
+  margin: 0;
+  font-size: 32px;
+  font-weight: 800;
+  color: #1F2937;
+  letter-spacing: -0.5px;
+  line-height: 1.2;
+}
+
+.app__period {
+  margin: 8px 0 0;
+  font-size: 14px;
+  font-weight: 500;
+  color: #6B7280;
+}
+
+/* ── 查詢區 ─────────────────────────────── */
+.query {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.query__row {
+  display: flex;
+  align-items: stretch;
+  gap: 10px;
+}
+
+.query__prefix {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 64px;
+  padding: 0 14px;
+  background: #FFFFFF;
+  border: none;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(31, 41, 55, 0.06);
+  font-family: "SF Mono", Menlo, Consolas, monospace;
+  font-size: 22px;
+  font-weight: 700;
+  color: #1F2937;
+  letter-spacing: 1px;
+}
+
+.query__input {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 60px;
+  padding: 0 18px;
+  background: #FFFFFF;
+  border: none;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(31, 41, 55, 0.06);
+  font-family: "SF Mono", Menlo, Consolas, monospace;
+  font-size: 22px;
+  font-weight: 600;
+  color: #1F2937;
+  letter-spacing: 2px;
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+  transition: box-shadow 0.15s ease;
+}
+
+.query__input::placeholder {
+  font-family: -apple-system, "Inter", "PingFang TC", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 0;
+  color: #9CA3AF;
+}
+
+.query__input:focus {
+  box-shadow: 0 4px 16px rgba(31, 41, 55, 0.12), 0 0 0 2px #1F2937;
+}
+
+.query__button {
+  width: 100%;
+  height: 60px;
+  background: #2563EB;  /* 參考圖中的藍色按鈕 */
+  border: none;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+  color: #FFFFFF;
+  font-family: inherit;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.1s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+}
+
+.query__button:active:not(:disabled) {
+  transform: translateY(1px);
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.2);
+}
+
+.query__button:disabled {
+  background: #9CA3AF;
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+/* ── 黃色提示(空白 / 長度不對) ──────────── */
+.hint {
+  margin: 0;
+  padding: 14px 16px;
+  background: #FEF3C7;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(31, 41, 55, 0.04);
+  font-size: 15px;
+  font-weight: 600;
+  color: #78350F;
+}
+
+/* ── 錯誤橫幅(API 失敗 / 主檔異常) ───────── */
+.error-banner {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 22px;
+  background: #FEE2E2;
+  color: #991B1B;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.error-banner__icon {
+  font-size: 20px;
+  flex: 0 0 auto;
+}
+
+.error-banner__text {
+  flex: 1 1 auto;
+  line-height: 1.4;
+}
+
+/* ── 結果區 ───────────────────────────────── */
+.result {
+  margin-top: 22px;
+}
+
+/* 三色卡片 — 大圓角無邊柔陰影 */
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  padding: 22px 22px 18px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(31, 41, 55, 0.10);
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.card--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 左上角黑色圓徽章(放圖示) */
+.card__icon {
+  width: 42px;
+  height: 42px;
+  margin-bottom: 28px;
+  background: #1F2937;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}
+
+.card__title {
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+  line-height: 1.2;
+  margin-bottom: 8px;
+}
+
+.card__subtitle {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.5;
+  margin-bottom: 22px;
+  font-family: "SF Mono", Menlo, Consolas, monospace;
+  word-break: break-all;
+  opacity: 0.88;
+}
+
+.card__again {
+  width: 100%;
+  height: 48px;
+  background: rgba(255, 255, 255, 0.92);
+  border: none;
+  border-radius: 12px;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.1s ease, background-color 0.15s ease;
+}
+
+.card__again:active {
+  transform: translateY(1px);
+  background: #FFFFFF;
+}
+
+/* 三色卡片配色(參考 ToDo App 圖) */
+.card--green {
+  background: #2D6A4F;  /* 較沉穩的森林綠 */
+  color: #FFFFFF;
+}
+.card--green .card__title { font-size: 36px; }
+.card--green .card__again { color: #1B4332; }
+
+.card--red {
+  background: #E76F51;  /* 珊瑚紅 */
+  color: #FFFFFF;
+}
+.card--red .card__again { color: #B33B1F; }
+
+.card--yellow {
+  background: #E9C46A;  /* 芥末黃 */
+  color: #1F2937;
+}
+.card--yellow .card__again { color: #78350F; }

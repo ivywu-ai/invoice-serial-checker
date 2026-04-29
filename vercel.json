@@ -1,0 +1,6 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "public": false,
+  "cleanUrls": true,
+  "trailingSlash": false
+}

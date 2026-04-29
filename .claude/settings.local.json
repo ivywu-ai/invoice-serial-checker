@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm init:*)",
+      "Bash(npm install:*)",
+      "Bash(npm --version)",
+      "Bash(vercel --version)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(node api/test-connection.js)",
+      "Bash(curl -s http://localhost:3000/api/current-issuance)",
+      "Bash(python3 -m json.tool)",
+      "Bash(cp .env .env.bak)",
+      "Bash(sed -i '' 's/NOTION_TOKEN=ntn_/NOTION_TOKEN=ntn_BROKEN/' .env)",
+      "Bash(git --version)",
+      "Bash(gh --version)"
+    ]
+  }
+}

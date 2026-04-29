@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#FAF7F2" />
+  <title>字軌越界判斷工具</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- 錯誤橫幅(SPEC F9 / F10):API 失敗或主檔狀態異常時顯示,初始隱藏 -->
+  <div id="error-banner" class="error-banner" hidden>
+    <span class="error-banner__icon">⚠️</span>
+    <span class="error-banner__text" id="error-banner-text">系統異常,請聯絡皮皮</span>
+  </div>
+
+  <main class="app">
+    <header class="app__header">
+      <h1 class="app__title">字軌越界判斷</h1>
+      <p class="app__period" id="period-label">載入中…</p>
+    </header>
+
+    <section class="query">
+      <div class="query__row">
+        <span class="query__prefix" id="prefix-label" aria-label="當期字軌前綴">載入中</span>
+        <input
+          id="number-input"
+          class="query__input"
+          type="text"
+          inputmode="numeric"
+          autocomplete="off"
+          maxlength="8"
+          placeholder="輸入 8 碼數字"
+          aria-label="字軌號碼輸入框"
+        />
+      </div>
+
+      <button id="query-button" class="query__button" type="button">
+        查 詢
+      </button>
+
+      <!-- 黃色提示(SPEC F3 空白 / F4 長度不對):初始隱藏 -->
+      <p id="hint" class="hint" hidden></p>
+    </section>
+
+    <!-- 結果區(Sprint 3 才填入三色卡片) -->
+    <section id="result" class="result" aria-live="polite"></section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
